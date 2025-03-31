@@ -1,0 +1,44 @@
+services:
+  postgres-sql:
+    image: postgres:17
+    container_name: db_postgres_17
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: db_smart_schedule
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    networks:
+      - smart-schedule-network
+    volumes:
+      - db-smart-schedule:/var/lib/postgresql/data
+
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: john.doe@example.com
+      PGADMIN_DEFAULT_USER: john
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5433:80"
+    expose:
+      - 5433
+    depends_on:
+      - postgres-sql
+    networks:
+      - smart-schedule-network
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin/data
+
+volumes:
+  db-smart-schedule:
+  pgadmin-data:
+
+networks:
+  smart-schedule-network:
+    driver: bridge
