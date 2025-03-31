@@ -2,6 +2,7 @@ package br.com.smart.schedule.service
 
 import br.com.smart.schedule.entities.Person
 import br.com.smart.schedule.exception.FileStorageException
+import br.com.smart.schedule.file.exporter.factory.FileExporterFactory
 import br.com.smart.schedule.file.importer.contract.FileImporter
 import br.com.smart.schedule.file.importer.factory.FileImporterFactory
 import br.com.smart.schedule.repository.PersonRepository
@@ -11,6 +12,8 @@ import br.com.smart.schedule.vo.PersonRequestVO
 import br.com.smart.schedule.vo.PersonResponseVO
 import org.apache.coyote.BadRequestException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.Resource
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
@@ -23,6 +26,9 @@ class ScheduleService {
 
     @Autowired
     private lateinit var importer: FileImporterFactory
+
+    @Autowired
+    private lateinit var exporter: FileExporterFactory
 
     fun getAllSchedules(): List<PersonResponseVO> {
         return parseListObjects(origin = personRepository.findAll(), destination = PersonResponseVO::class.java)
@@ -56,6 +62,22 @@ class ScheduleService {
             }
         } catch (e: Exception) {
             throw FileStorageException("Error processing the file!")
+        }
+    }
+
+    fun exportSpreadsheet(
+        pageable: Pageable,
+        acceptHeader: String
+    ): Resource? {
+        val people = personRepository.findAll(pageable).map { person ->
+            parseObject(person, Person::class.java)
+        }
+            .content
+        try {
+            val exporter = exporter.getExporter(acceptHeader)
+            return exporter.exportFile(people)
+        } catch (e: Exception) {
+            throw RuntimeException("Error during file export!", e)
         }
     }
 }
