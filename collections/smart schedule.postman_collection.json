@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "e98577fa-d506-4e3d-a1fb-682a27e27682",
+		"name": "smart schedule",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19925093",
+		"_collection_link": "https://gold-eclipse-488450.postman.co/workspace/Projects-and-Student~e7d25d4b-b386-4d48-8cfb-e14654f0ebee/collection/19925093-e98577fa-d506-4e3d-a1fb-682a27e27682?action=share&source=collection_link&creator=19925093"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "schedule",
+					"item": [
+						{
+							"name": "get all schedules",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/smart/schedule/v1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"smart",
+										"schedule",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create nem schedule",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Flávio\",\r\n    \"surname\": \"Júnior\",\r\n    \"gender\": \"MALE\",\r\n    \"email\": \"juniorflavio.ofc@gmail.com\",\r\n    \"date\": \"2025-03-31\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/smart/schedule/v1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"smart",
+										"schedule",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "upload of spreadsheet",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Flávio\",\r\n    \"surname\": \"Júnior\",\r\n    \"gender\": \"MALE\",\r\n    \"email\": \"juniorflavio.ofc@gmail.com\",\r\n    \"date\": \"2025-03-31\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/smart/schedule/v1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"smart",
+										"schedule",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
