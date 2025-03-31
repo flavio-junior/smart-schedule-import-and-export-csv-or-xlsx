@@ -2,7 +2,6 @@ package br.com.smart.schedule.vo
 
 import br.com.smart.schedule.utils.GENDER
 import java.time.LocalDate
-import java.util.*
 
 data class PersonRequestVO(
     var name: String? = null,
